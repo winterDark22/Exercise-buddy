@@ -1,0 +1,10 @@
+<div className="mt-20">
+      <BrowserRouter>
+        <Navbar />
+        <div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>

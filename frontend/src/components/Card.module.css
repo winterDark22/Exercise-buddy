@@ -1,0 +1,14 @@
+.card {
+  padding-left: 0 px;
+  padding-right: 80px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f59e0b;
+  margin-top: 20px;
+  border-radius: 0.125rem;
+  justify-content: center;
+}
+.card:hover {
+  background-color: rgb(234 88 12);
+  transform: scale(1.02);
+}
