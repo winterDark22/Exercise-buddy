@@ -23,7 +23,7 @@ function Home() {
     };
 
     fetchWorkouts();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="flex justify-around bg-yellow-50 pt-14">

@@ -1,5 +1,8 @@
 import { useWorkoutsContext, ACTION } from "../context/WorkoutContext";
 
+//date-fns
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
+
 const Card = (props) => {
   const { dispatch } = useWorkoutsContext();
 
@@ -19,18 +22,22 @@ const Card = (props) => {
 
   return (
     <div className={props.className}>
-      <div className="px-28 text-lg font-bold">
+      <div className="px-28 text-lg">
         <h1>TITLE: {props.workout.title}</h1>
         <h3>REPS: {props.workout.reps}</h3>
         <h3>LOAD: {props.workout.load}</h3>
-        <p>Created At: {props.workout.createdAt}</p>
-        <p> id: {props.workout._id}</p>
-        <button
-          className="border-spacing-3 bg-yellow-200 p-2"
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
+        <p>
+          {formatDistanceToNow(new Date(props.workout.createdAt), {
+            addSuffix: true,
+          })}
+        </p>
+        {/* <p> id: {props.workout._id}</p> */}
+
+        <div className="ps-80">
+          <span className="material-symbols-outlined" onClick={handleDelete}>
+            delete
+          </span>
+        </div>
       </div>
     </div>
   );
