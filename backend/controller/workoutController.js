@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 
 //get all workouts
 const getAllWorkout = async (req, res) => {
-  const workouts = await Workout.find({}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+  const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 });
   //.select("title reps load");
 
   // console.log(newWorkouts);
@@ -29,7 +30,10 @@ const getWorkout = async (req, res) => {
 
 //create a workout
 const createNewWorkout = async (req, res) => {
+  //this req now has an user property attached to it, which we attached in the requireAuth middleware
+  //we can now attach this _id with the workout as user_id
   const { title, load, reps } = req.body;
+  const user_id = req.user._id;
 
   const emptyFields = [];
   if (!title) emptyFields.push("title");
@@ -48,6 +52,7 @@ const createNewWorkout = async (req, res) => {
       title,
       load,
       reps,
+      user_id,
     });
 
     res.status(200).json(newWorkout);

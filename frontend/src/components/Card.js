@@ -1,14 +1,24 @@
 import { useWorkoutsContext, ACTION } from "../context/WorkoutContext";
+import { useAuthContext } from "../context/AuthContext";
 
 //date-fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
+//this function should called WorkoutDetail. that should be meaningful
+
 const Card = (props) => {
   const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   const handleDelete = async () => {
+    if (!user) {
+      return;
+    }
     const response = await fetch("/api/workouts/" + props.workout._id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     });
 
     const responseJSON = await response.json();

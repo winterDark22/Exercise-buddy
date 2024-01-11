@@ -25,3 +25,27 @@
   background-color: #ddd;
   color: black;
 }
+
+.actions {
+  margin-top: 1rem;
+  text-align: right;
+
+  padding-right: 54px;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: rgb(182, 72, 14);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #77002e;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #a50e48;
+  border-color: #a50e48;
+}

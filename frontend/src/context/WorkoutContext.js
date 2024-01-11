@@ -12,7 +12,9 @@ export function useWorkoutsContext() {
   const context = useContext(WorkoutsContext); //return a obj = { state, dispatch}
 
   if (!context) {
-    throw Error("Trying to access context from outside");
+    throw Error(
+      "WorkoutContext must be used inside an WorkoutsContextProvider"
+    );
   }
   return context;
 }

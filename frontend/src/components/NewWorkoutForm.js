@@ -2,10 +2,12 @@ import { useRef, useState } from "react";
 
 import styles from "./NewWorkoutForm.module.css";
 import { useWorkoutsContext } from "../context/WorkoutContext";
+import { useAuthContext } from "../context/AuthContext";
 import { ACTION } from "../context/WorkoutContext";
 
 function NewWorkoutForm() {
   const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   const titleRef = useRef();
   const loadRef = useRef();
@@ -18,6 +20,11 @@ function NewWorkoutForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      seterrormsg("Please login first");
+      return;
+    }
+
     const title = titleRef.current.value;
     const load = loadRef.current.value;
     const reps = repsRef.current.value;
@@ -27,6 +34,7 @@ function NewWorkoutForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
       body: JSON.stringify(workout),
     });
@@ -54,6 +62,7 @@ function NewWorkoutForm() {
     <div className={styles.card}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h3 className={styles.header}>Add a new workout</h3>
+
         <div className={styles.control}>
           <label>Give a title</label>
           <input
